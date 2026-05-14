@@ -1,0 +1,379 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SciPy India x Rust Delhi</title>
+    <meta
+      name="description"
+      content="Scientific Computing in Rust and Python, a joint event by SciPy India and Rust Delhi, July 2026, New Delhi."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;1,300;1,400&family=Instrument+Sans:wght@400;500&family=Space+Grotesk:wght@500&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      :root {
+        --color-bg: oklch(96% 0.005 350);
+        --color-surface: oklch(98% 0 0);
+        --color-deep-graphite: oklch(10% 0 0);
+        --color-soft-charcoal: oklch(25% 0 0);
+        --color-mid-ash: oklch(55% 0 0);
+        --color-paper-mist: oklch(92% 0 0);
+        --color-magenta: oklch(60% 0.25 350);
+        --color-magenta-deep: oklch(52% 0.25 350);
+        --color-magenta-whisper: oklch(60% 0.25 350 / 0.15);
+        --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+      }
+
+      body {
+        background: var(--color-bg);
+        color: var(--color-deep-graphite);
+        font-family: "Instrument Sans", system-ui, sans-serif;
+        font-size: 1rem;
+        line-height: 1.6;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 3rem 1.5rem;
+      }
+
+      .container {
+        max-width: 480px;
+        width: 100%;
+      }
+
+      /* ── Logos ── */
+
+      .logos {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 1.5rem;
+        margin-bottom: 2rem;
+      }
+
+      .logo-link {
+        display: flex;
+        align-items: center;
+        text-decoration: none;
+        border-radius: 4px;
+        transition:
+          opacity 200ms var(--ease-out),
+          transform 300ms var(--ease-out);
+      }
+
+      .logo-link:hover {
+        opacity: 0.75;
+        transform: translateY(-2px);
+      }
+
+      .logo-link:focus-visible {
+        outline: 2px solid var(--color-magenta);
+        outline-offset: 6px;
+      }
+
+      .logos img {
+        height: 64px;
+        width: auto;
+        display: block;
+      }
+
+      .logos .sep {
+        font-family: "Cormorant Garamond", Georgia, serif;
+        font-size: 1.5rem;
+        font-weight: 300;
+        color: var(--color-mid-ash);
+        flex-shrink: 0;
+        user-select: none;
+      }
+
+      /* ── Event identity ── */
+
+      .event-name {
+        font-family: "Cormorant Garamond", Georgia, serif;
+        font-size: clamp(1.75rem, 5vw, 2.5rem);
+        font-weight: 300;
+        font-style: italic;
+        line-height: 1.2;
+        text-align: center;
+        color: var(--color-deep-graphite);
+        margin-bottom: 1rem;
+      }
+
+      .badge {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        font-family: "Space Grotesk", monospace;
+        font-size: 1rem;
+        font-weight: 500;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--color-mid-ash);
+        margin-bottom: 2.5rem;
+      }
+
+      .badge-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: oklch(58% 0.16 145);
+        flex-shrink: 0;
+      }
+
+      /* ── Divider ── */
+
+      .divider {
+        width: 100%;
+        height: 1px;
+        background: var(--color-paper-mist);
+        margin-bottom: 2rem;
+      }
+
+      /* ── Linktree items ── */
+
+      .links {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        margin-bottom: 2.5rem;
+      }
+
+      a.btn {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 1rem 1.25rem;
+        background: var(--color-surface);
+        border: 1px solid var(--color-paper-mist);
+        border-radius: 0;
+        color: var(--color-soft-charcoal);
+        text-decoration: none;
+        font-family: "Instrument Sans", system-ui, sans-serif;
+        font-size: 1rem;
+        font-weight: 400;
+        transition:
+          border-color 200ms var(--ease-out),
+          color 200ms var(--ease-out),
+          transform 300ms var(--ease-out),
+          box-shadow 300ms var(--ease-out);
+      }
+
+      a.btn:hover {
+        border-color: var(--color-magenta);
+        color: var(--color-magenta);
+        transform: translateY(-1px);
+        box-shadow:
+          0 4px 24px -4px rgba(0, 0, 0, 0.12),
+          0 1px 3px rgba(0, 0, 0, 0.06);
+      }
+
+      a.btn:focus-visible {
+        outline: 2px solid var(--color-magenta);
+        outline-offset: -2px;
+      }
+
+      a.btn:active {
+        transform: translateY(0);
+      }
+
+      a.btn.primary {
+        background: var(--color-deep-graphite);
+        border-color: var(--color-deep-graphite);
+        color: oklch(98% 0 0);
+        font-weight: 500;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+      }
+
+      a.btn.primary:hover {
+        background: var(--color-magenta);
+        border-color: var(--color-magenta);
+        color: oklch(98% 0 0);
+        box-shadow:
+          0 4px 24px -4px rgba(0, 0, 0, 0.18),
+          0 1px 3px rgba(0, 0, 0, 0.08);
+      }
+
+      .btn-label {
+        flex: 1;
+      }
+
+      .btn-arrow {
+        font-size: 1rem;
+        margin-left: 1rem;
+        flex-shrink: 0;
+        transition: transform 300ms var(--ease-out);
+      }
+
+      a.btn:hover .btn-arrow {
+        transform: translateX(4px);
+      }
+
+      /* ── Footer ── */
+
+      footer {
+        text-align: center;
+        font-size: 1rem;
+        color: var(--color-mid-ash);
+        line-height: 2;
+        padding-top: 2rem;
+        border-top: 1px solid var(--color-paper-mist);
+      }
+
+      footer a {
+        color: var(--color-mid-ash);
+        text-decoration: underline;
+        text-decoration-color: var(--color-paper-mist);
+        text-underline-offset: 3px;
+        transition:
+          color 200ms var(--ease-out),
+          text-decoration-color 200ms var(--ease-out);
+      }
+
+      footer a:hover {
+        color: var(--color-magenta);
+        text-decoration-color: var(--color-magenta);
+      }
+
+      footer a:focus-visible {
+        outline: 2px solid var(--color-magenta);
+        outline-offset: 3px;
+        border-radius: 2px;
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+          transition-duration: 0ms !important;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="container">
+      <div class="logos">
+        <a
+          href="https://scipy.in/"
+          class="logo-link"
+          aria-label="SciPy India"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <img src="scipy-india-logo.svg" alt="SciPy India" />
+        </a>
+        <span class="sep" aria-hidden="true">×</span>
+        <a
+          href="https://rustdelhi.in"
+          class="logo-link"
+          aria-label="Rust Delhi"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <img src="rustdelhi-logo.svg" alt="Rust Delhi" />
+        </a>
+      </div>
+
+      <h1 class="event-name">
+        Scientific Computing in Rust&nbsp;and&nbsp;Python
+      </h1>
+      <p class="badge">
+        July 2026, New Delhi
+      </p>
+
+      <div class="divider" role="separator"></div>
+
+      <nav class="links" aria-label="Event links">
+        <a
+          href="https://github.com/scipy-india/proposal-reviewing/issues/new?template=rust-delhi-scipy-india-proposal.yaml"
+          class="btn primary"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <span class="btn-label">Submit a proposal!</span>
+          <span class="btn-arrow" aria-hidden="true">→</span>
+        </a>
+
+        <a
+          href="https://rustdelhi.in"
+          class="btn"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <span class="btn-label">Rust Delhi</span>
+          <span class="btn-arrow" aria-hidden="true">→</span>
+        </a>
+
+        <a
+          href="https://scipy.in/"
+          class="btn"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <span class="btn-label">SciPy India</span>
+          <span class="btn-arrow" aria-hidden="true">→</span>
+        </a>
+
+        <a
+          href="https://t.me/RustDelhi"
+          class="btn"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <span class="btn-label"
+            >Join the Rust Delhi community chat (Telegram)</span
+          >
+          <span class="btn-arrow" aria-hidden="true">→</span>
+        </a>
+
+        <a
+          href="https://scipyindia.zulipchat.com/join/4mesdxfbbpl4titgtdzx4iwv/"
+          class="btn"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <span class="btn-label"
+            >Join the SciPy India community chat (Zulip)</span
+          >
+          <span class="btn-arrow" aria-hidden="true">→</span>
+        </a>
+      </nav>
+
+      <footer>
+        <a href="https://scipy.in/coc" target="_blank" rel="noopener noreferrer"
+          >SciPy India Code of Conduct</a
+        >
+        <br />
+        <a
+          href="https://github.com/rustdelhi/policies/blob/main/Code-of-Conduct.md"
+          target="_blank"
+          rel="noopener noreferrer"
+          >Rust Delhi Code of Conduct</a
+        >
+        <br />
+        Talks licensed under
+        <a
+          href="http://creativecommons.org/licenses/by-nc-sa/4.0/"
+          target="_blank"
+          rel="noopener noreferrer"
+          >CC BY-NC-SA 4.0</a
+        >
+      </footer>
+    </main>
+  </body>
+</html>
