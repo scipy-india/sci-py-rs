@@ -6,7 +6,7 @@
     <title>SciPy India x Rust Delhi</title>
     <meta
       name="description"
-      content="Scientific Computing in Rust and Python, a joint event by SciPy India and Rust Delhi, August 2026, New Delhi."
+      content="Scientific Computing in Rust and Python, a joint event by SciPy India and Rust Delhi, 22 August 2026, Noida."
     />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -43,11 +43,12 @@
         font-size: 1rem;
         line-height: 1.6;
         min-height: 100vh;
+        min-height: 100dvh;
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        padding: 3rem 1.5rem;
+        padding: clamp(1rem, 4vh, 3rem) 1.5rem;
       }
 
       .container {
@@ -62,7 +63,7 @@
         align-items: center;
         justify-content: center;
         gap: 1.5rem;
-        margin-bottom: 2rem;
+        margin-bottom: clamp(0.75rem, 3vh, 2rem);
       }
 
       .logo-link {
@@ -86,7 +87,7 @@
       }
 
       .logos img {
-        height: 64px;
+        height: clamp(40px, 8vh, 64px);
         width: auto;
         display: block;
       }
@@ -104,35 +105,60 @@
 
       .event-name {
         font-family: "Cormorant Garamond", Georgia, serif;
-        font-size: clamp(1.75rem, 5vw, 2.5rem);
+        font-size: clamp(1.375rem, 4vw, 2.5rem);
         font-weight: 300;
         font-style: italic;
         line-height: 1.2;
         text-align: center;
         color: var(--color-deep-graphite);
-        margin-bottom: 1rem;
+        margin-bottom: clamp(0.5rem, 1.5vh, 1rem);
       }
 
-      .badge {
+      /* ── Event details ── */
+
+      .details {
         display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 0.5rem;
+        flex-direction: column;
+        gap: clamp(0.5rem, 1.5vh, 1rem);
+        text-align: center;
+        margin-bottom: clamp(1rem, 3vh, 2rem);
+      }
+
+      .details-row dt {
         font-family: "Space Grotesk", monospace;
-        font-size: 1rem;
+        font-size: 0.9rem;
         font-weight: 500;
-        letter-spacing: 0.08em;
+        letter-spacing: 0.12em;
         text-transform: uppercase;
         color: var(--color-mid-ash);
-        margin-bottom: 2.5rem;
+        margin-bottom: 0.375rem;
       }
 
-      .badge-dot {
-        width: 8px;
-        height: 8px;
-        border-radius: 50%;
-        background: oklch(58% 0.16 145);
-        flex-shrink: 0;
+      .details-row dd {
+        font-size: clamp(0.8125rem, 1.8vh, 1rem);
+        color: var(--color-soft-charcoal);
+        line-height: 1.4;
+      }
+
+      .details-row dd a {
+        color: inherit;
+        text-decoration: underline;
+        text-decoration-color: var(--color-paper-mist);
+        text-underline-offset: 3px;
+        transition:
+          color 200ms var(--ease-out),
+          text-decoration-color 200ms var(--ease-out);
+      }
+
+      .details-row dd a:hover {
+        color: var(--color-magenta);
+        text-decoration-color: var(--color-magenta);
+      }
+
+      .details-row dd a:focus-visible {
+        outline: 2px solid var(--color-magenta);
+        outline-offset: 3px;
+        border-radius: 2px;
       }
 
       /* ── Divider ── */
@@ -141,7 +167,7 @@
         width: 100%;
         height: 1px;
         background: var(--color-paper-mist);
-        margin-bottom: 2rem;
+        margin-bottom: clamp(0.75rem, 2vh, 1.5rem);
       }
 
       /* ── Linktree items ── */
@@ -149,22 +175,22 @@
       .links {
         display: flex;
         flex-direction: column;
-        gap: 0.5rem;
-        margin-bottom: 2.5rem;
+        gap: clamp(0.375rem, 1vh, 0.5rem);
+        margin-bottom: clamp(1rem, 3vh, 2rem);
       }
 
       a.btn {
         display: flex;
         align-items: center;
         justify-content: space-between;
-        padding: 1rem 1.25rem;
+        padding: clamp(0.625rem, 2vh, 1rem) 1.25rem;
         background: var(--color-surface);
         border: 1px solid var(--color-paper-mist);
         border-radius: 0;
         color: var(--color-soft-charcoal);
         text-decoration: none;
         font-family: "Instrument Sans", system-ui, sans-serif;
-        font-size: 1rem;
+        font-size: clamp(0.875rem, 1.8vh, 1rem);
         font-weight: 400;
         transition:
           border-color 200ms var(--ease-out),
@@ -228,10 +254,10 @@
 
       footer {
         text-align: center;
-        font-size: 1rem;
+        font-size: clamp(0.8125rem, 1.6vh, 0.9375rem);
         color: var(--color-mid-ash);
-        line-height: 2;
-        padding-top: 2rem;
+        line-height: 1.6;
+        padding-top: clamp(0.75rem, 2vh, 1.5rem);
         border-top: 1px solid var(--color-paper-mist);
       }
 
@@ -292,13 +318,39 @@
       <h1 class="event-name">
         Scientific Computing in Rust&nbsp;and&nbsp;Python
       </h1>
-      <p class="badge">
-        August 2026, New Delhi
-      </p>
+
+      <dl class="details">
+        <div class="details-row">
+          <dt>When</dt>
+          <dd>Saturday, 22nd August 2026, 2:00 – 5:00 PM IST</dd>
+        </div>
+        <div class="details-row">
+          <dt>Where</dt>
+          <dd>
+            <a
+              href="https://maps.app.goo.gl/AZrgtkaNiqddFDz99"
+              target="_blank"
+              rel="noopener noreferrer"
+              >Essentia.dev, Third Floor, C56/A28, C Block, Phase 2, Industrial
+              Area, Sector 62, Noida, Uttar Pradesh 201309</a
+            >
+          </dd>
+        </div>
+      </dl>
 
       <div class="divider" role="separator"></div>
 
       <nav class="links" aria-label="Event links">
+        <a
+          href="https://www.meetup.com/rustdelhi/events/315185336/"
+          class="btn primary"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <span class="btn-label">Register!</span>
+          <span class="btn-arrow" aria-hidden="true">→</span>
+        </a>
+
         <a
           href="https://github.com/scipy-india/proposal-reviewing/issues/new?template=rust-delhi-scipy-india-proposal.yaml"
           class="btn primary"
